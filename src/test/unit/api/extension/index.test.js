@@ -96,6 +96,21 @@ test('expect testnet address', async () => {
   expect(account.paymentAddr).toContain('addr_');
 });
 
+test('expect network changes correctly', async () => {
+  await setNetwork({ id: 'mainnet', node: NODE.mainnet });
+  const mainnetNetwork = await getNetwork();
+  expect(mainnetNetwork.id).toBe('mainnet');
+  await setNetwork({ id: 'testnet', node: NODE.testnet });
+  const testnetNetwork = await getNetwork();
+  expect(testnetNetwork.id).toBe('testnet');
+  await setNetwork({ id: 'preprod', node: NODE.preprod });
+  const preprodNetwork = await getNetwork();
+  expect(preprodNetwork.id).toBe('preprod');
+  await setNetwork({ id: 'preview', node: NODE.preview });
+  const previewNetwork = await getNetwork();
+  expect(previewNetwork.id).toBe('preview');
+});
+
 test('should encrypt/decrypt root key correctly', async () => {
   const rootKey = Loader.Cardano.Bip32PrivateKey.generate_ed25519_bip32();
   const password = 'test123';

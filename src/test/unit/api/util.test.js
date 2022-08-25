@@ -3,6 +3,7 @@ import {
   convertMetadataPropToString,
   linkToSrc,
   valueToAssets,
+  networkNameToId,
 } from '../../../api/util';
 import Loader from '../../../api/loader';
 import provider from '../../../config/provider';
@@ -127,5 +128,11 @@ describe('test linkToSrc', () => {
     const convertedArray = convertMetadataPropToString(array);
     expect(convertedArray).toEqual(normalString);
     expect(convertedArray).toEqual(convertedString);
+  });
+  test('expect correct network id', () => {
+    expect(networkNameToId('mainnet')).toEqual(1);
+    expect(networkNameToId('testnet')).toEqual(0);
+    expect(networkNameToId('preprod')).toEqual(2);
+    expect(networkNameToId('preview')).toEqual(3);
   });
 });
