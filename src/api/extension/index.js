@@ -460,9 +460,15 @@ export const setNetwork = async (network) => {
   if (network.id === NETWORK_ID.mainnet) {
     id = NETWORK_ID.mainnet;
     node = NODE.mainnet;
-  } else {
+  } else if (network.id === NETWORK_ID.testnet) {
     id = NETWORK_ID.testnet;
     node = NODE.testnet;
+  } else if (network.id === NETWORK_ID.preprod) {
+    id = NETWORK_ID.preprod;
+    node = NODE.preprod;
+  } else {
+    id = NETWORK_ID.preview;
+    node = NODE.preview;
   }
   if (network.node) node = network.node;
   if (currentNetwork && currentNetwork.id !== id)
@@ -643,7 +649,9 @@ export const isValidAddress = async (address) => {
     const addr = Loader.Cardano.Address.from_bech32(address);
     if (
       (addr.network_id() === 1 && network.id === NETWORK_ID.mainnet) ||
-      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet)
+      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet) ||
+      (addr.network_id() === 2 && network.id === NETWORK_ID.preprod) ||
+      (addr.network_id() === 3 && network.id === NETWORK_ID.preview)
     )
       return addr.to_bytes();
     return false;
@@ -652,7 +660,9 @@ export const isValidAddress = async (address) => {
     const addr = Loader.Cardano.ByronAddress.from_base58(address);
     if (
       (addr.network_id() === 1 && network.id === NETWORK_ID.mainnet) ||
-      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet)
+      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet) ||
+      (addr.network_id() === 2 && network.id === NETWORK_ID.preprod) ||
+      (addr.network_id() === 3 && network.id === NETWORK_ID.preview)
     )
       return addr.to_address().to_bytes();
     return false;
@@ -667,7 +677,9 @@ const isValidAddressBytes = async (address) => {
     const addr = Loader.Cardano.Address.from_bytes(address);
     if (
       (addr.network_id() === 1 && network.id === NETWORK_ID.mainnet) ||
-      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet)
+      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet) ||
+      (addr.network_id() === 2 && network.id === NETWORK_ID.preprod) ||
+      (addr.network_id() === 3 && network.id === NETWORK_ID.preview)
     )
       return true;
     return false;
@@ -676,7 +688,9 @@ const isValidAddressBytes = async (address) => {
     const addr = Loader.Cardano.ByronAddress.from_bytes(address);
     if (
       (addr.network_id() === 1 && network.id === NETWORK_ID.mainnet) ||
-      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet)
+      (addr.network_id() === 0 && network.id === NETWORK_ID.testnet) ||
+      (addr.network_id() === 2 && network.id === NETWORK_ID.preprod) ||
+      (addr.network_id() === 3 && network.id === NETWORK_ID.preview)
     )
       return true;
     return false;

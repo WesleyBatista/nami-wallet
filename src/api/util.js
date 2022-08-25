@@ -82,7 +82,12 @@ export const currencyToSymbol = (currency) => {
 export const hexToAscii = (hex) => Buffer.from(hex, 'hex').toString();
 
 export const networkNameToId = (name) => {
-  const names = { [NETWORK_ID.mainnet]: 1, [NETWORK_ID.testnet]: 0 };
+  const names = {
+    [NETWORK_ID.mainnet]: 1,
+    [NETWORK_ID.testnet]: 0,
+    [NETWORK_ID.preprod]: 2,
+    [NETWORK_ID.preview]: 3,
+  };
   return names[name];
 };
 

@@ -54,7 +54,7 @@ The exposed API follows for most parts this proposed [CIP](https://github.com/ca
 #### Basic Usage
 
 - Detect the Cardano provider (`window.cardano`)
-- Detect which Cardano network the user is connected to (ID 1 = Mainnet, ID 0 = Testnet)
+- Detect which Cardano network the user is connected to (ID 1 = Mainnet, ID 0 = Testnet, ID 2 = Preprod, ID 3 = Preview)
 - Get the user's Cardano account
 
 #### Methods
@@ -138,7 +138,7 @@ cardano.getRewardAddress() : RewardAddress
 cardano.getNetworkId() : number
 ```
 
-Returns `0` if on `testnet`, otherwise `1` if on `mainnet`.
+Returns `0` if on `testnet`, `1` if on `mainnet`, `2` if on `preprod` or `3` if on `preview`.
 
 ##### cardano.signData(address, payload)
 
